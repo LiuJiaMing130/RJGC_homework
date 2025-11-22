@@ -58,7 +58,7 @@ function Workshops({ user }: WorkshopsProps) {
     if (!workshopsData || workshopsData.length === 0) return;
     
     // 优先预加载前6张封面图（高优先级）
-    workshopsData.slice(0, 6).forEach((workshop, index) => {
+    workshopsData.slice(0, 6).forEach((workshop) => {
       if (!workshop.cover_image) return;
       const optimizedUrl = optimizeImageUrl(workshop.cover_image, 400, 85);
       preloadImage(optimizedUrl, 'high').then(() => {

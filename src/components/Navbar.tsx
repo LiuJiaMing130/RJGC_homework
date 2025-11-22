@@ -3,11 +3,11 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 interface NavbarProps {
-  user: any;
+  user?: any;
   setUser: (user: any) => void;
 }
 
-function Navbar({ user, setUser }: NavbarProps) {
+function Navbar({ setUser }: NavbarProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

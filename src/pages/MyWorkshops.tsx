@@ -102,7 +102,16 @@ function MyWorkshops({ user }: MyWorkshopsProps) {
         .limit(50); // 限制加载数量，提高性能
 
       if (error) throw error;
-      const registrationsData = (data || []) as WorkshopRegistration[];
+      
+      // 处理 Supabase 返回的数据结构，workshop 可能是数组或对象
+      const registrationsData = (data || []).map((item: any) => {
+        const workshop = Array.isArray(item.workshop) ? item.workshop[0] : item.workshop;
+        return {
+          ...item,
+          workshop: workshop || null
+        };
+      }).filter((item: any) => item.workshop !== null) as WorkshopRegistration[];
+      
       setRegistrations(registrationsData);
       
       // 更新缓存
